@@ -188,7 +188,7 @@ void exercicio13() {
   int age = int.parse(stdin.readLineSync()!);
   List ages = [];
 
-  while (age > 0) {
+  while (age >= 0) {
     ages.add(age);
     stdout.write("Informe a idade da pessoa: ");
     age = int.parse(stdin.readLineSync()!);
@@ -201,13 +201,7 @@ void exercicio13() {
 }
 
 void exercicio14() {
-  print("CALCULADORA EM DART");
-  print("1 - Soma");
-  print("2 - Subtrair");
-  print("3 - Multiplicar");
-  print("4 - Dividir");
-  print("5 - Resto");
-  print("0 - Sair");
+  prints();
   stdout.write("Escolha uma opção: ");
   int option = int.parse(stdin.readLineSync()!);
 
@@ -216,13 +210,7 @@ void exercicio14() {
       print("Opção desconhecida");
       stdout.write("Precione enter para continuar...");
       stdin.readLineSync(encoding: utf8);
-      print("CALCULADORA EM DART");
-      print("1 - Soma");
-      print("2 - Subtrair");
-      print("3 - Multiplicar");
-      print("4 - Dividir");
-      print("5 - Resto");
-      print("0 - Sair");
+      prints();
       stdout.write("Escolha uma opção: ");
       option = int.parse(stdin.readLineSync()!);
     } else {
@@ -258,17 +246,23 @@ void exercicio14() {
               "${number1.toStringAsFixed(0)} % ${number2.toStringAsFixed(0)} = ${remainder.toStringAsFixed(2)}");
           break;
         default:
+          print("Opção desconhecida");
           break;
       }
-      print("CALCULADORA EM DART");
-      print("1 - Soma");
-      print("2 - Subtrair");
-      print("3 - Multiplicar");
-      print("4 - Dividir");
-      print("5 - Resto");
-      print("0 - Sair");
+      prints();
       stdout.write("Escolha uma opção: ");
       option = int.parse(stdin.readLineSync()!);
     }
   }
+  print("Encerrando Programa!!");
+}
+
+prints() {
+  print("CALCULADORA EM DART");
+  print("1 - Soma");
+  print("2 - Subtrair");
+  print("3 - Multiplicar");
+  print("4 - Dividir");
+  print("5 - Resto");
+  print("0 - Sair");
 }
