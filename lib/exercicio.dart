@@ -138,18 +138,19 @@ void exercicio10() {
   stdout.write("Informe um número inteiro positivo: ");
   int number = int.parse(stdin.readLineSync()!);
   List count = [];
+
   for (int i = 0; i < number; i++) {
     if (i % 2 == 0) {
       count.add(i);
     }
   }
+
   print(count.map((e) => e.toString()).join(" "));
 }
 
 void exercicio11() {
   stdout.write("Informe o total de alunos: ");
   int totalStudents = int.parse(stdin.readLineSync()!);
-
   List grades = [];
 
   for (int i = 1; i <= totalStudents; i++) {
@@ -171,11 +172,12 @@ void exercicio11() {
 void exercicio12() {
   stdout.write("Informe um número que quer calcular o fatorial: ");
   int number = int.parse(stdin.readLineSync()!);
-
   List numbers = [];
+
   for (int i = number; i > 0; i--) {
     numbers.add(i);
   }
+
   String numbersString = numbers.map((e) => e.toString()).join(" x ");
   int result = numbers.reduce((value, element) => value * element);
   print("$numbersString = $result");
@@ -184,13 +186,89 @@ void exercicio12() {
 void exercicio13() {
   stdout.write("Informe a idade da pessoa: ");
   int age = int.parse(stdin.readLineSync()!);
-
   List ages = [];
-  if (age > 0) {
+
+  while (age > 0) {
     ages.add(age);
     stdout.write("Informe a idade da pessoa: ");
     age = int.parse(stdin.readLineSync()!);
-  } else if (age == -1) {
-    print("Encerrou");
+  }
+
+  int child = ages.where((element) => element < 18).length;
+  int adult = ages.where((element) => element >= 18).length;
+  print("Total Maior de idade: $adult");
+  print("Total Menor de idade: $child");
+}
+
+void exercicio14() {
+  print("CALCULADORA EM DART");
+  print("1 - Soma");
+  print("2 - Subtrair");
+  print("3 - Multiplicar");
+  print("4 - Dividir");
+  print("5 - Resto");
+  print("0 - Sair");
+  stdout.write("Escolha uma opção: ");
+  int option = int.parse(stdin.readLineSync()!);
+
+  while (option != 0) {
+    if (option > 5) {
+      print("Opção desconhecida");
+      stdout.write("Precione enter para continuar...");
+      stdin.readLineSync(encoding: utf8);
+      print("CALCULADORA EM DART");
+      print("1 - Soma");
+      print("2 - Subtrair");
+      print("3 - Multiplicar");
+      print("4 - Dividir");
+      print("5 - Resto");
+      print("0 - Sair");
+      stdout.write("Escolha uma opção: ");
+      option = int.parse(stdin.readLineSync()!);
+    } else {
+      stdout.write("Informe o primeiro número: ");
+      double number1 = double.parse(stdin.readLineSync()!);
+      stdout.write("Informe o segundo número: ");
+      double number2 = double.parse(stdin.readLineSync()!);
+
+      switch (option) {
+        case 1:
+          double sum = number1 + number2;
+          print(
+              "${number1.toStringAsFixed(0)} + ${number2.toStringAsFixed(0)} = ${sum.toStringAsFixed(0)}");
+          break;
+        case 2:
+          double subtraction = number1 - number2;
+          print(
+              "${number1.toStringAsFixed(0)} - ${number2.toStringAsFixed(0)} = ${subtraction.toStringAsFixed(0)}");
+          break;
+        case 3:
+          double multiplication = number1 * number2;
+          print(
+              "${number1.toStringAsFixed(0)} * ${number2.toStringAsFixed(0)} = ${multiplication.toStringAsFixed(0)}");
+          break;
+        case 4:
+          double division = number1 / number2;
+          print(
+              "${number1.toStringAsFixed(0)} / ${number2.toStringAsFixed(0)} = ${division.toStringAsFixed(2)}");
+          break;
+        case 5:
+          double remainder = number1 % number2;
+          print(
+              "${number1.toStringAsFixed(0)} % ${number2.toStringAsFixed(0)} = ${remainder.toStringAsFixed(2)}");
+          break;
+        default:
+          break;
+      }
+      print("CALCULADORA EM DART");
+      print("1 - Soma");
+      print("2 - Subtrair");
+      print("3 - Multiplicar");
+      print("4 - Dividir");
+      print("5 - Resto");
+      print("0 - Sair");
+      stdout.write("Escolha uma opção: ");
+      option = int.parse(stdin.readLineSync()!);
+    }
   }
 }

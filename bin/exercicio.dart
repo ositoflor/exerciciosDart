@@ -1,7 +1,7 @@
 import 'package:exercicio/exercicio.dart';
 
 void main() {
-  exercicio13();
+  exercicio14();
   // for (int i = 1; i <= 11; i++) {
   //   print("Exercício $i");
   //   switch (i) {
