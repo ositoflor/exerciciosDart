@@ -137,36 +137,25 @@ void exercicio10() {
   print("Descubra os Pares");
   stdout.write("Informe um número inteiro positivo: ");
   int number = int.parse(stdin.readLineSync()!);
-  List count = [];
 
   for (int i = 0; i < number; i++) {
     if (i % 2 == 0) {
-      count.add(i);
+      stdout.write("$i ");
     }
   }
-
-  print(count.map((e) => e.toString()).join(" "));
 }
 
 void exercicio11() {
   stdout.write("Informe o total de alunos: ");
   int totalStudents = int.parse(stdin.readLineSync()!);
-  List grades = [];
+  double totalNotas = 0;
 
-  for (int i = 1; i <= totalStudents; i++) {
-    stdout.write("Informe a nota do aluno $i: ");
-    double grade = double.parse(stdin.readLineSync()!);
-    grades.add(grade);
+  for (int i = 0; i < totalStudents; i++) {
+    stdout.write("Informe a nota do aluno ${i + 1}: ");
+    double notas = double.parse(stdin.readLineSync()!);
+    totalNotas += notas;
   }
-
-  double sum = 0;
-
-  grades.forEach((element) {
-    sum += element;
-  });
-
-  double average = sum / totalStudents;
-  print("A média da turma é: ${average.toStringAsFixed(2)}");
+  print("A média da turma é: ${totalNotas / totalStudents}");
 }
 
 void exercicio12() {
@@ -184,14 +173,21 @@ void exercicio12() {
 }
 
 void exercicio13() {
-  stdout.write("Informe a idade da pessoa: ");
-  int age = int.parse(stdin.readLineSync()!);
+  bool isRunning = true;
   List ages = [];
 
-  while (age >= 0) {
-    ages.add(age);
+  while (isRunning) {
     stdout.write("Informe a idade da pessoa: ");
-    age = int.parse(stdin.readLineSync()!);
+    int age = int.parse(stdin.readLineSync()!);
+
+    switch (age) {
+      case -1:
+        isRunning = false;
+        break;
+      default:
+        ages.add(age);
+        break;
+    }
   }
 
   int child = ages.where((element) => element < 18).length;
@@ -201,68 +197,75 @@ void exercicio13() {
 }
 
 void exercicio14() {
-  prints();
-  stdout.write("Escolha uma opção: ");
-  int option = int.parse(stdin.readLineSync()!);
+  bool isRunning = true;
 
-  while (option != 0) {
-    if (option > 5) {
-      print("Opção desconhecida");
-      stdout.write("Precione enter para continuar...");
-      stdin.readLineSync(encoding: utf8);
-      prints();
-      stdout.write("Escolha uma opção: ");
-      option = int.parse(stdin.readLineSync()!);
-    } else {
-      stdout.write("Informe o primeiro número: ");
-      double number1 = double.parse(stdin.readLineSync()!);
-      stdout.write("Informe o segundo número: ");
-      double number2 = double.parse(stdin.readLineSync()!);
+  while (isRunning) {
+    print("CALCULADORA EM DART");
+    print("1 - Soma");
+    print("2 - Subtrair");
+    print("3 - Multiplicar");
+    print("4 - Dividir");
+    print("5 - Resto");
+    print("0 - Sair");
+    stdout.write("Escolha uma opção: ");
+    int option = int.parse(stdin.readLineSync()!);
 
-      switch (option) {
-        case 1:
-          double sum = number1 + number2;
-          print(
-              "${number1.toStringAsFixed(0)} + ${number2.toStringAsFixed(0)} = ${sum.toStringAsFixed(0)}");
-          break;
-        case 2:
-          double subtraction = number1 - number2;
-          print(
-              "${number1.toStringAsFixed(0)} - ${number2.toStringAsFixed(0)} = ${subtraction.toStringAsFixed(0)}");
-          break;
-        case 3:
-          double multiplication = number1 * number2;
-          print(
-              "${number1.toStringAsFixed(0)} * ${number2.toStringAsFixed(0)} = ${multiplication.toStringAsFixed(0)}");
-          break;
-        case 4:
-          double division = number1 / number2;
-          print(
-              "${number1.toStringAsFixed(0)} / ${number2.toStringAsFixed(0)} = ${division.toStringAsFixed(2)}");
-          break;
-        case 5:
-          double remainder = number1 % number2;
-          print(
-              "${number1.toStringAsFixed(0)} % ${number2.toStringAsFixed(0)} = ${remainder.toStringAsFixed(2)}");
-          break;
-        default:
-          print("Opção desconhecida");
-          break;
-      }
-      prints();
-      stdout.write("Escolha uma opção: ");
-      option = int.parse(stdin.readLineSync()!);
+    switch (option) {
+      case 1:
+        calc("+");
+        break;
+      case 2:
+        calc("-");
+        break;
+      case 3:
+        calc("*");
+        break;
+      case 4:
+        calc("/");
+        stdin.readLineSync();
+        break;
+      case 5:
+        calc("%");
+        break;
+      case 0:
+        stdout.write("Encerrando programa!");
+        isRunning = false;
+        break;
+      default:
+        print("Opção inválida");
+        stdout.write("Precione enter para continuar...");
+        stdin.readLineSync();
+        break;
     }
   }
-  print("Encerrando Programa!!");
 }
 
-prints() {
-  print("CALCULADORA EM DART");
-  print("1 - Soma");
-  print("2 - Subtrair");
-  print("3 - Multiplicar");
-  print("4 - Dividir");
-  print("5 - Resto");
-  print("0 - Sair");
+calc(op) {
+  stdout.write("Informe o primeiro número: ");
+  double number1 = double.parse(stdin.readLineSync()!);
+  stdout.write("Informe o segundo número: ");
+  double number2 = double.parse(stdin.readLineSync()!);
+  if (op == "+") {
+    double sum = number1 + number2;
+    print(
+        "${number1.toStringAsFixed(0)} + ${number2.toStringAsFixed(0)} = ${sum.toStringAsFixed(0)}");
+  } else if (op == "-") {
+    double sub = number1 - number2;
+    print(
+        "${number1.toStringAsFixed(0)} - ${number2.toStringAsFixed(0)} = ${sub.toStringAsFixed(0)}");
+  } else if (op == "*") {
+    double mult = number1 * number2;
+    print(
+        "${number1.toStringAsFixed(0)} * ${number2.toStringAsFixed(0)} = ${mult.toStringAsFixed(0)}");
+  } else if (op == "/") {
+    double div = number1 / number2;
+    print(
+        "${number1.toStringAsFixed(0)} / ${number2.toStringAsFixed(0)} = ${div.toStringAsFixed(2)}");
+  } else if (op == "%") {
+    double rest = number1 % number2;
+    print(
+        "${number1.toStringAsFixed(0)} % ${number2.toStringAsFixed(0)} = ${rest.toStringAsFixed(2)}");
+  }
+  stdout.write("Precione enter para continuar...");
+  stdin.readLineSync();
 }
